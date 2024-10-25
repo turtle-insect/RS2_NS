@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,17 @@ using System.Windows.Input;
 
 namespace RS2
 {
-	internal class ViewModel
+	internal class ViewModel : INotifyPropertyChanged
 	{
 		public ICommand OpenFileCommand { get; }
 		public ICommand SaveFileCommand { get; }
 		public ICommand ImportFileCommand { get; }
 		public ICommand ExportFileCommand { get; }
 
+		public Basic? Basic { get; private set; }
 		public ObservableCollection<Character> Characters { get; init; } = new ObservableCollection<Character>();
+
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public ViewModel()
 		{
@@ -38,8 +42,8 @@ namespace RS2
 				Characters.Add(new Character(address));
 			}
 
-			// money
-			// G01GamePlayDataSaveInfo -> Crown
+			Basic = new Basic();
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Basic)));
 		}
 
 		private void OpenFile(Object? param)

@@ -15,8 +15,8 @@ namespace RS2.Gvas
 
 		public Object Value
 		{
-			get => new Object();
-			set => throw new NotSupportedException();
+			get => "";
+			set{; }
 		}
 	}
 }

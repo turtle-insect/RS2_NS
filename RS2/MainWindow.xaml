@@ -21,6 +21,23 @@
 			</MenuItem>
 		</Menu>
 		<TabControl>
+			<TabItem Header="Basic">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="12*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="5"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Label Content="Crown"/>
+					<TextBox Grid.Column="1" Text="{Binding Basic.Crown.Value, UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
+			</TabItem>
 			<TabItem Header="Charcter">
 				<Grid>
 					<Grid.ColumnDefinitions>
