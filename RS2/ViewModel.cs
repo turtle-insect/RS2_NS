@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace RS2
 		public ICommand ImportFileCommand { get; }
 		public ICommand ExportFileCommand { get; }
 
+		public ObservableCollection<Character> Characters { get; init; } = new ObservableCollection<Character>();
+
 		public ViewModel()
 		{
 			OpenFileCommand = new ActionCommand(OpenFile);
@@ -25,8 +28,15 @@ namespace RS2
 
 		private void Initialize()
 		{
+			Characters.Clear();
 			// party
 			// G01PartySaveInfo -> 
+			// G01CharaStatus
+			var addresses = SaveData.Instance().FindAddress("G01CharaStatus", 0);
+			foreach (var address in addresses)
+			{
+				Characters.Add(new Character(address));
+			}
 
 			// money
 			// G01GamePlayDataSaveInfo -> Crown
