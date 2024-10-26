@@ -150,7 +150,41 @@
 							</Grid>
 						</TabItem>
 						<TabItem Header="Spell">
-							
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition Height="4*"/>
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition/>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<Label Content="FireLevel"/>
+								<TextBox Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.FireLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="1" Content="WaterLevel"/>
+								<TextBox Grid.Row="1" Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.WaterLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="2" Content="WindLevel"/>
+								<TextBox Grid.Row="2" Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.WindLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="3" Content="EarthLevel"/>
+								<TextBox Grid.Row="3" Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.EarthLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="4" Content="DivineLevel"/>
+								<TextBox Grid.Row="4" Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DivineLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="5" Content="DarkLevel"/>
+								<TextBox Grid.Row="5" Grid.Column="1"
+									 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DarkLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+							</Grid>
 						</TabItem>
 					</TabControl>
 				</Grid>
