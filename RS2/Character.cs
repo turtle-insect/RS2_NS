@@ -20,6 +20,24 @@ namespace RS2
 		public Gvas.IValueElement DarkMagic { get; init; }
 		public Gvas.IValueElement SpellPower { get; init; }
 
+		// skill
+		public Gvas.IValueElement SwordLevel { get; init; }
+		public Gvas.IValueElement GreatswordLevel { get; init; }
+		public Gvas.IValueElement AxeLevel { get; init; }
+		public Gvas.IValueElement ClubLevel { get; init; }
+		public Gvas.IValueElement SpearLevel { get; init; }
+		public Gvas.IValueElement ShortswordLevel { get; init; }
+		public Gvas.IValueElement BowLevel { get; init; }
+		public Gvas.IValueElement MartialLevel { get; init; }
+
+		// spell
+		public Gvas.IValueElement FireLevel { get; init; }
+		public Gvas.IValueElement WaterLevel { get; init; }
+		public Gvas.IValueElement WindLevel { get; init; }
+		public Gvas.IValueElement EarthLevel { get; init; }
+		public Gvas.IValueElement DivineLevel { get; init; }
+		public Gvas.IValueElement DarkLevel { get; init; }
+
 		public Character(uint address)
 		{
 			HP = Gvas.GvasProperty.CreateGvasProperty(address, "MHitPoint");
@@ -33,6 +51,24 @@ namespace RS2
 			Stamina = Gvas.GvasProperty.CreateGvasProperty(address, "MStamina");
 			DarkMagic = Gvas.GvasProperty.CreateGvasProperty(address, "MDarkMagic");
 			SpellPower = Gvas.GvasProperty.CreateGvasProperty(address, "MSpellPower");
+
+			// skill
+			SwordLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MSwordLevel");
+			GreatswordLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MGreatswordLevel");
+			AxeLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MAxeLevel");
+			ClubLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MClubLevel");
+			SpearLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MSpearLevel");
+			ShortswordLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MShortswordLevel");
+			BowLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MBowLevel");
+			MartialLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MMartialLevel");
+
+			// spell
+			FireLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MFireLevel");
+			WaterLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MWaterLevel");
+			WindLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MWindLevel");
+			EarthLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MEarthLevel");
+			DivineLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MDivineLevel");
+			DarkLevel = Gvas.GvasProperty.CreateGvasProperty(address, "MDarkLevel");
 		}
 	}
 }

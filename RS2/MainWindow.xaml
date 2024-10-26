@@ -47,7 +47,8 @@
 			<TabItem Header="Charcter">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="200"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition/>
 						<ColumnDefinition/>
 					</Grid.ColumnDefinitions>
 					<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}"/>
@@ -104,6 +105,54 @@
 						<TextBox Grid.Row="10" Grid.Column="1"
 								 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpellPower.Value, UpdateSourceTrigger=PropertyChanged}"/>
 					</Grid>
+					<TabControl Grid.Column="2">
+						<TabItem Header="Skill">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition/>
+									<RowDefinition Height="4*"/>
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition/>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<Label Content="SwordLevel"/>
+								<TextBox Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SwordLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="1" Content="GreatswordLevel"/>
+								<TextBox Grid.Row="1" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.GreatswordLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="2" Content="AxeLevel"/>
+								<TextBox Grid.Row="2" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AxeLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="3" Content="ClubLevel"/>
+								<TextBox Grid.Row="3" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.ClubLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="4" Content="SpearLevel"/>
+								<TextBox Grid.Row="4" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpearLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="5" Content="ShortswordLevel"/>
+								<TextBox Grid.Row="5" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.ShortswordLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="6" Content="BowLevel"/>
+								<TextBox Grid.Row="6" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.BowLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+								<Label Grid.Row="7" Content="MartialLevel"/>
+								<TextBox Grid.Row="7" Grid.Column="1"
+										 Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MartialLevel.Value, UpdateSourceTrigger=PropertyChanged}"/>
+							</Grid>
+						</TabItem>
+						<TabItem Header="Spell">
+							
+						</TabItem>
+					</TabControl>
 				</Grid>
 			</TabItem>
 		</TabControl>
