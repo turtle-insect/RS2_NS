@@ -20,6 +20,6 @@ https://store-jp.nintendo.com/item/software/D70010000067814
 
 # 編集時の手順
 * saveDataを吸い出す
-* 『DAT_x(0)』をToolで読み込む
+* 『DAT_x』をToolで読み込む
 * 任意の編集を行う
 * saveDataを書き戻す
