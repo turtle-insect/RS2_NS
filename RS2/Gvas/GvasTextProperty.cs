@@ -13,32 +13,36 @@ namespace RS2.Gvas
 		{
 			// total size -> [0]->8Byte
 
-			var value = ValueAddress();
-			return value.Item1 + value.Item2;
+			// key + value address
+			address = ValueAddress();
+			var propValue = Gvas.GetString(address);
+			return address + propValue.length;
 		}
 
 		public override object Value
 		{
 			get
 			{
-				var value = ValueAddress();
-				return SaveData.Instance().ReadText(value.Item1, value.Item2);
+				var address = ValueAddress();
+				var propValue = Gvas.GetString(address);
+				return propValue.name;
 			}
 			set
 			{
 				var name = value.ToString();
 				if (name == null) return;
 				// +1 -> termination
-				uint size = (uint)name.Length + 1;
 
-				var tmp = ValueAddress();
-				SaveData.Instance().Reducion(tmp.Item1, tmp.Item2);
-				SaveData.Instance().Extension(tmp.Item1, size);
+				var address = ValueAddress();
+				uint size = SaveData.Instance().ReadNumber(address, 4);
+				SaveData.Instance().Reducion(address, size);
+				size = (uint)name.Length + 1;
+				SaveData.Instance().Extension(address, size);
 
 				// key's value
-				SaveData.Instance().WriteText(tmp.Item1, size, name);
+				SaveData.Instance().WriteText(address, size, name);
 				// key's size
-				SaveData.Instance().WriteNumber(tmp.Item1 - 4, 4, size);
+				SaveData.Instance().WriteNumber(address - 4, 4, size);
 
 				// total size
 				size += SaveData.Instance().ReadNumber(mAddress + 14, 4);
@@ -51,20 +55,15 @@ namespace RS2.Gvas
 		}
 
 		// (uint, uint) -> address, size
-		private (uint, uint) ValueAddress()
+		private uint ValueAddress()
 		{
 			// key's length -> [14]->4Byte
 			uint address = mAddress + 14;
-			uint length = SaveData.Instance().ReadNumber(address, 4);
-			address += 4 + length;
 
-			// key's name -> [18]->length
-			// var key = SaveData.Instance().ReadText(address + 18, length);
+			var propKey = Gvas.GetString(address);
+			address += propKey.length;
 
-			// key's value Size -> [18+length]->4Byte
-			uint size = SaveData.Instance().ReadNumber(address, 4);
-			// key's value -> [18+length+4]
-			return (address + 4, size);
+			return address;
 		}
 	}
 }

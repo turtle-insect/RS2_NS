@@ -12,12 +12,8 @@ namespace RS2.Gvas
 
 		public static GvasStructProperty[] CreateGvasProperties(uint address, String name, uint count)
 		{
-			// property's type length.
-			var length = SaveData.Instance().ReadNumber(address, 4);
-			address += 4;
-			// type's name
-			var type = SaveData.Instance().ReadText(address, length);
-			address += length;
+			// property's name
+			var propName = Gvas.GetString(address);
 
 			var properties = new GvasStructProperty[count];
 			address += 21;
@@ -25,7 +21,7 @@ namespace RS2.Gvas
 			for (uint i = 0; i < count; i++)
 			{
 				// unique struct
-				switch (type)
+				switch (propName.name)
 				{
 					case "G01PartyCharaStatus":
 						properties[i] = new Character();

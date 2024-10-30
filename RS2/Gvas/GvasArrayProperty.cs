@@ -11,46 +11,37 @@ namespace RS2.Gvas
 		private GvasProperty[] mProperties = [];
 		public override uint Read(uint address)
 		{
-			mAddress = address;
-
 			// ??? [0]->8Byte
 			// size?
 
-			// property's type length.
-			address += 8;
-			uint length = SaveData.Instance().ReadNumber(address, 4);
-
 			// property's type
-			address += 4;
-			String type = SaveData.Instance().ReadText(address, length);
+			address += 8;
+			var propType = Gvas.GetString(address);
+			address += propType.length;
 
 			// ??? [12+length]->1Byte
 
 			// array's count
-			address += length + 1;
+			address += 1;
 			uint count = SaveData.Instance().ReadNumber(address, 4);
 			address += 4;
 
-			switch (type)
+			switch (propType.Item1)
 			{
 				case "StructProperty":
 					// property's name
-					length = SaveData.Instance().ReadNumber(address, 4);
-					address += 4;
-					var name = SaveData.Instance().ReadText(address, length);
-					address += length;
+					var propName = Gvas.GetString(address);
 
 					// property's type
-					length = SaveData.Instance().ReadNumber(address, 4);
-					address += 4;
-					type = SaveData.Instance().ReadText(address, length);
-					address += length;
+					address += propName.length;
+					propType = Gvas.GetString(address);
+					address += propType.length;
 
 					// ???
 					// size?
 					uint size = SaveData.Instance().ReadNumber(address, 4);
 					address += 8;
-					mProperties = GvasStructProperty.CreateGvasProperties(address, name, count);
+					mProperties = GvasStructProperty.CreateGvasProperties(address, propType.name, count);
 					break;
 			}
 

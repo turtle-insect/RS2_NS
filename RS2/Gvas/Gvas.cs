@@ -15,19 +15,18 @@ namespace RS2.Gvas
 			{
 				return new GvasNoneProperty();
 			}
-
-			// property's type length.
 			address = list[0] - 4;
-			var length = SaveData.Instance().ReadNumber(address, 4);
-			address = list[0] + length;
-			length = SaveData.Instance().ReadNumber(address, 4);
-			address += 4;
+
+			// property's name
+			var propName = GetString(address);
+
 			// property's type
-			var type = SaveData.Instance().ReadText(address, length);
-			address += length;
+			address += propName.length;
+			var propType = GetString(address);
+			address += propType.length;
 
 			GvasProperty property = new GvasNoneProperty();
-			switch (type)
+			switch (propType.name)
 			{
 				case "IntProperty":
 					property = new GvasIntProperty();
@@ -46,6 +45,14 @@ namespace RS2.Gvas
 			property.Name = name;
 			property.Read(address);
 			return property;
+		}
+
+		// (String, uint) -> name, address
+		public static (String name, uint length) GetString(uint address)
+		{
+			uint length = SaveData.Instance().ReadNumber(address, 4);
+			String name = SaveData.Instance().ReadText(address + 4, length);
+			return (name, length + 4);
 		}
 	}
 }
