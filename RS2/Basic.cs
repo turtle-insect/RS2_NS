@@ -9,9 +9,9 @@ namespace RS2
 {
 	internal class Basic
 	{
-		public Gvas.IValueElement Crown { get; init; }
-		public Gvas.IValueElement TotalBattleCount { get; init; }
-		public Gvas.IValueElement TotalBattleWinCount { get; init; }
+		public Gvas.GvasProperty Crown { get; init; }
+		public Gvas.GvasProperty TotalBattleCount { get; init; }
+		public Gvas.GvasProperty TotalBattleWinCount { get; init; }
 
 		public Basic()
 		{
@@ -20,9 +20,9 @@ namespace RS2
 			var addresses = SaveData.Instance().FindAddress("G01GamePlayDataSaveInfo", 0);
 			if (addresses.Count > 0)
 			{
-				Crown = Gvas.GvasProperty.CreateGvasProperty(addresses[0], "Crown");
-				TotalBattleCount = Gvas.GvasProperty.CreateGvasProperty(addresses[0], "TotalBattleCount");
-				TotalBattleWinCount = Gvas.GvasProperty.CreateGvasProperty(addresses[0], "TotalBattleWinCount");
+				Crown = Gvas.Gvas.CreateGvasProperty(addresses[0], "Crown");
+				TotalBattleCount = Gvas.Gvas.CreateGvasProperty(addresses[0], "TotalBattleCount");
+				TotalBattleWinCount = Gvas.Gvas.CreateGvasProperty(addresses[0], "TotalBattleWinCount");
 			}
 			else
 			{

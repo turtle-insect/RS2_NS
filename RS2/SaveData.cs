@@ -60,7 +60,7 @@ namespace RS2
 		{
 			if (String.IsNullOrEmpty(mFileName) || mBuffer == null) return false;
 
-			Byte[] comp = null;
+			Byte[] comp = new Byte[0];
 			using (var input = new MemoryStream(mBuffer))
 			{
 				using (var output = new MemoryStream())
@@ -98,6 +98,32 @@ namespace RS2
 		{
 			if (mBuffer == null) return;
 			System.IO.File.WriteAllBytes(filename, mBuffer);
+		}
+
+		public void Extension(uint address, uint size)
+		{
+			if (mBuffer == null) return;
+
+			var length = mBuffer.Length + size;
+			var tmp = new Byte[length];
+			Array.Copy(mBuffer, tmp, address);
+			Array.Copy(mBuffer, address, tmp, address + size, mBuffer.Length - address);
+			mBuffer = tmp;
+		}
+
+		public void Reducion(uint address, uint size)
+		{
+			if (mBuffer == null) return;
+			if (mBuffer.Length < address + size)
+			{
+				size = (uint)mBuffer.Length - address;
+			}
+
+			var length = mBuffer.Length - size;
+			var tmp = new Byte[length];
+			Array.Copy(mBuffer, tmp, address);
+			Array.Copy(mBuffer, address + size, tmp, address, length - address);
+			mBuffer = tmp;
 		}
 
 		public uint ReadNumber(uint address, uint size)

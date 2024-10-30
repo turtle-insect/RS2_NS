@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace RS2.Gvas
 {
-	internal class GvasNoneProperty : IValueElement
+	internal class GvasNoneProperty : GvasProperty
 	{
-		public String Name()
+		public override uint Read(uint address)
 		{
-			return "";
+			throw new NotImplementedException();
 		}
 
-		public Object Value
+		public override Object Value
 		{
 			get => "";
-			set{; }
+			set { }
 		}
 	}
 }

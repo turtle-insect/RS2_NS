@@ -7,29 +7,27 @@ using System.Threading.Tasks;
 
 namespace RS2.Gvas
 {
-	internal class GvasIntProperty : IValueElement
+	internal class GvasIntProperty : GvasProperty
 	{
-		private readonly uint mAddress;
-		private readonly String mName;
-		public GvasIntProperty(uint address, String name)
+		private uint mSize;
+
+		public override uint Read(uint address)
 		{
-			mAddress = address;
-			mName = name;
+			// Size -> [0]->8Byte
+			mSize = SaveData.Instance().ReadNumber(address, 4);
+
+			// ??? -> 1Byte
+			return address + 13;
 		}
 
-		public String Name()
+		public override Object Value
 		{
-			return mName;
-		}
-
-		public Object Value
-		{
-			get => SaveData.Instance().ReadNumber(mAddress, 4);
+			get => SaveData.Instance().ReadNumber(mAddress + 9, mSize);
 			set
 			{
 				uint num;
 				if (!uint.TryParse(value.ToString(), out num)) return;
-				SaveData.Instance().WriteNumber(mAddress, 4, num);
+				SaveData.Instance().WriteNumber(mAddress + 9, mSize, num);
 			}
 		}
 	}

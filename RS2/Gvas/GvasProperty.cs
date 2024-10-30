@@ -6,39 +6,24 @@ using System.Threading.Tasks;
 
 namespace RS2.Gvas
 {
-	internal class GvasProperty
+	internal abstract class GvasProperty
 	{
-		private readonly uint mAddress;
+		protected uint mAddress = 0;
+		protected String mName = "";
 
-		public static IValueElement CreateGvasProperty(uint bassAddress, String name)
+		public abstract uint Read(uint address);
+		public abstract Object Value { get; set; }
+
+		public uint Address
 		{
-			var list = SaveData.Instance().FindAddress(name, bassAddress);
-			if(list.Count == 0)
-			{
-				return new GvasNoneProperty();
-			}
+			get => mAddress;
+			set => mAddress = value;
+		}
 
-			// "IntProperty".Length -> 4Byte
-			// String IntProperty -> 12Byte
-			
-			// 型チェック
-			// check name length.
-			var address = list[0] - 4;
-			var length = SaveData.Instance().ReadNumber(address, 4);
-			address = list[0] + length;
-			length = SaveData.Instance().ReadNumber(address, 4);
-			address += 4;
-			// check name's type
-			var type = SaveData.Instance().ReadText(address, length);
-			address += length;
-			switch (type)
-			{
-				case "IntProperty":
-					// Size -> 4Byte
-					// ??? -> 5Byte
-					return new GvasIntProperty(address + 9, name);
-			}
-			return new GvasNoneProperty();
+		public String Name
+		{
+			get => mName;
+			set => mName = value;
 		}
 	}
 }

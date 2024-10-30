@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
+using RS2.Gvas;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -33,13 +35,25 @@ namespace RS2
 		private void Initialize()
 		{
 			Characters.Clear();
+
+
 			// party
-			// G01PartySaveInfo -> 
-			// G01CharaStatus
-			var addresses = SaveData.Instance().FindAddress("G01CharaStatus", 0);
-			foreach (var address in addresses)
+			// G01PartySaveInfo -> MPartyMemberStatus -> G01PartyCharaStatus ->
+			// {
+			//     .....
+			//     G01CharaStatus
+			// }
+
+			var status = Gvas.Gvas.CreateGvasProperty(0, "MPartyMemberStatus");
+			var properties = status.Value as GvasProperty[];
+			if (properties != null)
 			{
-				Characters.Add(new Character(address));
+				foreach (var property in properties)
+				{
+					var character = property as Character;
+					if (character == null) continue;
+					Characters.Add(character);
+				}
 			}
 
 			Basic = new Basic();
