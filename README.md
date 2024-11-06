@@ -1,3 +1,5 @@
+![DL Count](https://img.shields.io/github/downloads/turtle-insect/RS2_NS/total.svg)
+
 # 概要
 Switch ロマンシングサガ2のセーブデータ編集Tool
 
